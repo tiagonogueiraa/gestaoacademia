@@ -118,25 +118,34 @@ class TenancyServiceProvider extends ServiceProvider
         }
     }
 
-    protected function mapRoutes()
-    {
-        $this->app->booted(function () {
-            if (file_exists(base_path('routes/tenant.php'))) {
-                Route::namespace(static::$controllerNamespace)
-                    ->group(base_path('routes/tenant.php'));
-            }
-        });
-    }
     // protected function mapRoutes()
     // {
     //     $this->app->booted(function () {
     //         if (file_exists(base_path('routes/tenant.php'))) {
     //             Route::namespace(static::$controllerNamespace)
-    //                 ->prefix('tenant')  // Adiciona prefixo /tenant
     //                 ->group(base_path('routes/tenant.php'));
     //         }
     //     });
     // }
+   
+    protected function mapRoutes()
+    {
+        $this->app->booted(function () {
+
+            // ROTAS DO CENTRAL APP
+            Route::middleware(['web'])
+                ->domain('gestaoacademia.localhost')
+                ->group(base_path('routes/central.php'));
+
+            // ROTAS DOS TENANTS
+            Route::middleware([
+                'web',
+                \Stancl\Tenancy\Middleware\InitializeTenancyByDomain::class,
+                \Stancl\Tenancy\Middleware\PreventAccessFromCentralDomains::class,
+            ])
+                ->group(base_path('routes/tenant.php'));
+        });
+    }
 
     protected function makeTenancyMiddlewareHighestPriority()
     {
