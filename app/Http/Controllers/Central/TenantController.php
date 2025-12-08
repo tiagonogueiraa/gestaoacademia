@@ -12,23 +12,7 @@ class TenantController extends Controller
 {
     public function index()
     {
-        // $tenants = Tenant::all()->map(function($tenant) {
-      
-        //     return [
-        //         'id' => $tenant->id,
-        //         'domain' => optional($tenant->domains()->first())->domain ?? '',
-        //         'created_at' => $tenant->created_at->format('d/m/Y H:i'),
-        //     ];
-        // });
-
-        // $tenants = Tenant::all();
-        // echo "<pre>";
-        // var_dump($tenants);
-        // echo "</pre>";
-
-        // return inertia('Central/Tenants/Index', [
-        //     'tenants' => $tenants,
-        // ]);
+        // RETORNA A VIEW COM TODOS OS TENANTS
 
         $tenants = Tenant::with('domains')->get()->map(function($tenant) {
         $firstDomain = $tenant->domains->first();
@@ -47,11 +31,16 @@ class TenantController extends Controller
 
     public function create()
     {
+        // RETORNA O FORMULÁRIO DE CRIAÇÃO DO TENANT
         return inertia('Central/Tenants/Create');
     }
 
     public function store(Request $request)
     {
+
+        // Ver todos os dados que chegaram
+        // dump($request->all());
+
         $data = $request->validate([
             'id' => 'required|string|max:255|unique:tenants,id',
             'domain' => 'required|string|max:255|unique:domains,domain',
@@ -72,7 +61,8 @@ class TenantController extends Controller
         \Artisan::call('tenants:migrate', [
             '--tenants' => [$tenant->id],
         ]);
-
-        return redirect()->route('central.tenants.index');
+     
+        return redirect()->route('central.tenants.index')
+        ->with('success', 'Tenant criada com sucesso!');
     }
 }

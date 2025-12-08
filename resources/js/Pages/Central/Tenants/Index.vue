@@ -4,7 +4,7 @@
 
             <h1 class="text-3xl font-bold mb-4">Academias</h1>
 
-            <a href="/central/tenants/create" class="bg-blue-600 text-white px-3 py-2 rounded">
+            <a href="/tenants/create" class="bg-blue-600 text-white px-3 py-2 rounded">
             + Nova Academia
             </a>
 

@@ -35,7 +35,24 @@ const form = useForm({
   domain: "",
 });
 
+// FUNÇÃO SUBMIT CHAMADO AO ENVIAR O FORMULARIO
 function submit() {
-  form.post("/central/tenants");
+
+  form.post(route('central.tenants.store'), {
+    onSuccess: () => {
+        // alert('Cadastrado com sucesso!')
+        console.log(' executado com sucesso');
+    },
+    onError: (errors) => {
+      // Executado quando dá erro de validação (status 422)
+      console.log('Erros de validação:', errors)
+    //   alert('Erro ao cadastrar!')
+    },
+    onFinish: () => {
+      // Executado sempre no final (sucesso ou erro)
+      console.log('Requisição finalizada')
+    }
+
+  })
 }
 </script>
