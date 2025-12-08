@@ -5,7 +5,7 @@
 
                 <h1 class="text-2xl font-bold mb-4">Criar nova Academia</h1>
 
-                <form @submit.prevent="submit" class="space-y-3 max-w-md">
+                <form @submit.prevent="submit" class="space-y-3 max-w-full">
 
                     <div>
                         <label>ID da academia</label>
@@ -17,9 +17,14 @@
                         <input v-model="form.domain" class="border p-2 w-full" placeholder="ex: academia2.localhost" />
                     </div>
 
-                    <button class="bg-green-600 text-white px-3 py-2 rounded" :disabled="form.processing">
-                        Criar
-                    </button>
+                    <div class="flex justify-between items-center mt-4">
+                       <button type="button" @click="$inertia.visit('/tenants')" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">
+                          Voltar
+                      </button>
+                      <button class="bg-green-600 text-white px-3 py-2 rounded" :disabled="form.processing">
+                          Criar
+                      </button>
+                    </div>
 
                 </form>
             </div>

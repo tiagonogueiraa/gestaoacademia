@@ -44,35 +44,30 @@
 
 <script setup>
 import { ref, watch } from 'vue'
-import { usePage } from '@inertiajs/vue3'
+// import { usePage } from '@inertiajs/vue3'
 import TenantLayout from '@/Layouts/TenantLayout.vue'
 
 defineProps({
   members: Array
 })
 
-const page = usePage()
-const showSuccess = ref(false)
-const showError = ref(false)
+// const page = usePage()
+// const showSuccess = ref(false)
+// const showError = ref(false)
 
-// Observar mudanças nas flash messages
-watch(() => page.props.flash, (flash) => {
-  if (flash?.success) {
-    showSuccess.value = true
-    setTimeout(() => showSuccess.value = false, 5000) // Auto-hide após 5s
-  }
-  if (flash?.error) {
-    showError.value = true
-    setTimeout(() => showError.value = false, 5000)
-  }
-}, { immediate: true, deep: true })
+// // Observar mudanças nas flash messages
+// watch(() => page.props.flash, (flash) => {
+//   if (flash?.success) {
+//     showSuccess.value = true
+//     setTimeout(() => showSuccess.value = false, 5000) // Auto-hide após 5s
+//   }
+//   if (flash?.error) {
+//     showError.value = true
+//     setTimeout(() => showError.value = false, 5000)
+//   }
+// }, { immediate: true, deep: true })
 </script>
 
 <style scoped>
-.fade-enter-active, .fade-leave-active {
-  transition: opacity 0.5s;
-}
-.fade-enter-from, .fade-leave-to {
-  opacity: 0;
-}
+
 </style>

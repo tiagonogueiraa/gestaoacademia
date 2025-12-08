@@ -99,7 +99,9 @@ class TenantController extends Controller
     public function destroy(Tenant $tenant)
     {
         try {
-            // Tenta excluir o tenant, banco de dados e domínio                        
+            // Tenta excluir o tenant, banco de dados e domínio        
+            
+            // melhoria, é possível adicionar uma validação para ver se tem dados de alunos
             $tenant->delete();
 
             return redirect()->route('central.tenants.index')

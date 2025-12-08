@@ -7,7 +7,7 @@
             <pre>{{ JSON.stringify(form.errors, null, 2) }}</pre>
 
             <div class="bg-white shadow-md rounded-lg p-6 max-w-4xl">
-                <form @submit.prevent="submit" class="space-y-2 max-w-md">                    
+                <form @submit.prevent="submit" class="space-y-2 max-w-full">                    
                     <div>
                         <label class="block mb-1">Nome</label>
                         <input v-model="form.name" placeholder="Nome" class="border p-2 w-full" />

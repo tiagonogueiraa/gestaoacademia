@@ -6,7 +6,7 @@
                 Visualizar Academia
                 </h1>
 
-                <div class="space-y-3 max-w-lg">
+                <div class="space-y-3 max-w-full">
                 <div>
                     <label>ID:</label>
                     <input v-model="form.id" class="border p-2 w-full" placeholder="ex: academia2" />
