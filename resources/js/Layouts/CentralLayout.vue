@@ -1,3 +1,4 @@
+<!-- Criei um component menu para conseguir adicionar em todas as páginas -->
 <template>
   <div>
     <!-- Menu -->

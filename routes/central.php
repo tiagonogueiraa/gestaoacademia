@@ -7,7 +7,7 @@ use App\Http\Controllers\Central\TenantController;
 Route::get('/login', [CentralAuthController::class, 'showLogin'])->name('central.login');
 Route::post('/login', [CentralAuthController::class, 'login']);
 
-Route::get('/', [CentralAuthController::class, 'dashboard'])->name('central.home');
+// Route::get('/', [CentralAuthController::class, 'dashboard'])->name('central.home');
 
 Route::middleware('auth:central')->group(function () {
     // ROTAS DE AUTENTICAÇÃO E HOME QUANDO ESTÁ LOGADO
@@ -15,9 +15,14 @@ Route::middleware('auth:central')->group(function () {
     Route::post('/logout', [CentralAuthController::class, 'logout']);
 
     // ROTAS DO TENANT
+    Route::get('/', [TenantController::class, 'index'])->name('central.tenants.index'); // rota principal
     Route::get('/tenants', [TenantController::class, 'index'])->name('central.tenants.index');
     Route::get('/tenants/create', [TenantController::class, 'create'])->name('central.tenants.create');
     Route::post('/tenants', [TenantController::class, 'store'])->name('central.tenants.store');
+
+    Route::get('/tenants/{tenant}', [TenantController::class, 'edit'])->name('central.tenants.edit');
+
+    Route::delete('/tenants/{tenant}', [TenantController::class, 'destroy'])->name('central.tenants.destroy');
 });
 
 ?>

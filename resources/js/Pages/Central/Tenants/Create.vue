@@ -1,26 +1,28 @@
 <template>
     <CentralLayout>
-        <div class="p-6">
+        <div class="p-4">
+            <div class="bg-white shadow-md rounded-lg p-6 max-w-4xl">
 
-            <h1 class="text-2xl font-bold mb-4">Criar nova Academia</h1>
+                <h1 class="text-2xl font-bold mb-4">Criar nova Academia</h1>
 
-            <form @submit.prevent="submit" class="space-y-3 max-w-md">
+                <form @submit.prevent="submit" class="space-y-3 max-w-md">
 
-            <div>
-                <label>ID da academia</label>
-                <input v-model="form.id" class="border p-2 w-full" placeholder="ex: academia2" />
+                    <div>
+                        <label>ID da academia</label>
+                        <input v-model="form.id" class="border p-2 w-full" placeholder="ex: academia2" />
+                    </div>
+
+                    <div>
+                        <label>Domínio</label>
+                        <input v-model="form.domain" class="border p-2 w-full" placeholder="ex: academia2.localhost" />
+                    </div>
+
+                    <button class="bg-green-600 text-white px-3 py-2 rounded" :disabled="form.processing">
+                        Criar
+                    </button>
+
+                </form>
             </div>
-
-            <div>
-                <label>Domínio</label>
-                <input v-model="form.domain" class="border p-2 w-full" placeholder="ex: academia2.localhost" />
-            </div>
-
-            <button class="bg-green-600 text-white px-3 py-2 rounded" :disabled="form.processing">
-                Criar
-            </button>
-
-            </form>
 
         </div>
     </CentralLayout>
