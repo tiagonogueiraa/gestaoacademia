@@ -6,6 +6,8 @@ use App\Http\Controllers\CentralAuthController;
 Route::get('/login', [CentralAuthController::class, 'showLogin'])->name('central.login');
 Route::post('/login', [CentralAuthController::class, 'login']);
 
+Route::get('/', [CentralAuthController::class, 'dashboard'])->name('central.home');
+
 Route::middleware('auth:central')->group(function () {
     Route::get('/dashboard', [CentralAuthController::class, 'dashboard']);
     Route::post('/logout', [CentralAuthController::class, 'logout']);

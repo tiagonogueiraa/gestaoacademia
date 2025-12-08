@@ -13,6 +13,8 @@ use Stancl\Tenancy\Jobs;
 use Stancl\Tenancy\Listeners;
 use Stancl\Tenancy\Middleware;
 
+use Inertia\Inertia;
+
 class TenancyServiceProvider extends ServiceProvider
 {
     // By default, no namespace is used to support the callable array syntax.
@@ -103,6 +105,11 @@ class TenancyServiceProvider extends ServiceProvider
         $this->mapRoutes();
 
         $this->makeTenancyMiddlewareHighestPriority();
+
+        // Compartilhar dados do tenant com todas as páginas Inertia
+        Inertia::share('tenant', function () {
+            return tenancy()->tenant ? tenancy()->tenant->toArray() : null;
+        });
     }
 
     protected function bootEvents()

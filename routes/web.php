@@ -29,9 +29,9 @@
 // alterado pois a central nao é um tenant e não pode ter as outras 
 // rotas para não dar conflito no tenant
 
-use Illuminate\Support\Facades\Route;
+// use Illuminate\Support\Facades\Route;
 
-// Página inicial opcional
-Route::get('/', function () {
-    return redirect('gestaoacademia.localhost/login');
-});
+// // Página inicial opcional
+// Route::get('/', function () {
+//     return redirect('gestaoacademia.localhost/login');
+// });
