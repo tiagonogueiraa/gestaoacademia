@@ -76,7 +76,6 @@ class MemberController extends Controller
     {
         $member->delete();
 
-        // return back();
         return redirect()->route('tenant.members.index')
         ->with('success', 'Aluno deletado com sucesso!');
     }

@@ -96,9 +96,15 @@
                             <option value="inactive">Inativo</option>
                         </select>
                     </div>
-                    <button class="bg-green-600 text-white px-3 py-2 rounded">
-                        Salvar
-                    </button>
+                    <div class="flex justify-between items-center mt-4">         
+                        <button type="button" @click="$inertia.visit('/members')" class="bg-gray-500 text-white px-4 py-2 rounded hover:bg-gray-600">
+                            Voltar
+                        </button>
+                        
+                        <button class="bg-green-600 text-white px-3 py-2 rounded">
+                            Salvar
+                        </button>
+                    </div>
                 </form>
             </div>
         </div>
