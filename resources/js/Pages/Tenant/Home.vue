@@ -15,7 +15,7 @@
           📋 Gerenciar Alunos
         </a>
 
-        <a href="/dashboard" class="block bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded">
+        <a href="/dashboardGraficos" class="block bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded">
           📊 Ver Dashboard Breeze
         </a>
       </div>
