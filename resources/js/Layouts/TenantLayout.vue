@@ -6,7 +6,7 @@
       <div class="flex space-x-4">
         <a href="/" class="hover:bg-gray-700 px-3 py-2 rounded">Home</a>
         <a href="/members" class="hover:bg-gray-700 px-3 py-2 rounded">Alunos</a>
-        <a href="/tenants/dashboardGraficos" class="hover:bg-gray-700 px-3 py-2 rounded">Dashboard</a>
+        <a href="/dashboardGraficos" class="hover:bg-gray-700 px-3 py-2 rounded">Dashboard</a>
       </div>
     </nav>
 
