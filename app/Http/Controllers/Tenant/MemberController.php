@@ -22,29 +22,29 @@ class MemberController extends Controller
 
     public function store(Request $request)
     {
-        try {
-            // Converte vírgula para ponto no plan_value
-            if ($request->has('plan_value')) {
-                $request->merge([
-                    'plan_value' => str_replace(',', '.', $request->plan_value)
-                ]);
-            }
-    
-            $data = $request->validate([
-                'name'  => 'required|string|max:255',
-                'email' => 'required|email|max:255|unique:members,email', // aqui defini que o email é unico para não dá erro para o usuário
-                'phone' => 'required|string|max:50',
-                'birth_date' => 'nullable|date',
-                'status' => 'required|in:active,inactive',
-                'street' => 'nullable|string|max:255',
-                'number' => 'nullable|string|max:50',
-                'district' => 'nullable|string|max:255',
-                'city' => 'nullable|string|max:255',
-                'state' => 'nullable|string|max:2',
-                'zip_code' => 'nullable|string|max:20',
-                'plan_value' => 'required|numeric|min:0',
+        // Converte vírgula para ponto no plan_value
+        if ($request->has('plan_value')) {
+            $request->merge([
+                'plan_value' => str_replace(',', '.', $request->plan_value)
             ]);
-    
+        }
+
+        $data = $request->validate([
+            'name'  => 'required|string|max:255',
+            'email' => 'required|email|max:255|unique:members,email', // aqui defini que o email é unico para não dá erro para o usuário
+            'phone' => 'required|string|max:50',
+            'birth_date' => 'nullable|date',
+            'status' => 'required|in:active,inactive',
+            'street' => 'nullable|string|max:255',
+            'number' => 'nullable|string|max:50',
+            'district' => 'nullable|string|max:255',
+            'city' => 'nullable|string|max:255',
+            'state' => 'nullable|string|max:2',
+            'zip_code' => 'nullable|string|max:20',
+            'plan_value' => 'required|numeric|min:0',
+        ]);
+            
+        try {
             Member::create($data);
     
             return redirect()->route('tenant.members.index')
@@ -66,25 +66,26 @@ class MemberController extends Controller
     public function update(Request $request, Member $member)
     {
 
+        $data = $request->validate([
+            'name'  => 'required|string|max:255',
+            'email' => "required|email|max:255",
+            'phone' => 'required|string|max:50',
+            'birth_date' => 'nullable|date',
+            'status' => 'required|in:active,inactive',
+            'street' => 'nullable|string|max:255',
+            'number' => 'nullable|string|max:50',
+            'district' => 'nullable|string|max:255',
+            'city' => 'nullable|string|max:255',
+            'state' => 'nullable|string|max:2',
+            'zip_code' => 'nullable|string|max:20',
+            'plan_value' => 'required|numeric|min:0',
+        ]);
+            
         try {
-            $data = $request->validate([
-                'name'  => 'required|string|max:255',
-                'email' => "required|email|max:255",
-                'phone' => 'required|string|max:50',
-                'birth_date' => 'nullable|date',
-                'status' => 'required|in:active,inactive',
-                'street' => 'nullable|string|max:255',
-                'number' => 'nullable|string|max:50',
-                'district' => 'nullable|string|max:255',
-                'city' => 'nullable|string|max:255',
-                'state' => 'nullable|string|max:2',
-                'zip_code' => 'nullable|string|max:20',
-                'plan_value' => 'required|numeric|min:0',
-            ]);
-    
             $member->update($data);
     
-            return redirect()->route('tenant.members.index');
+            return redirect()->route('tenant.members.index')
+                ->with('success', 'Aluno atualizado com sucesso!');
 
         } catch (\Throwable $th) {
             return redirect()->route('tenant.members.index')
@@ -96,7 +97,6 @@ class MemberController extends Controller
     {
 
         try {
-            
             $member->delete();
     
             return redirect()->route('tenant.members.index')

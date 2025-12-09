@@ -31,11 +31,13 @@ Route::middleware([
             Route::delete('/{member}', [\App\Http\Controllers\Tenant\MemberController::class, 'destroy'])->name('destroy');
         });
     
-    
         Route::get('/', function () {
             // return inertia('Tenant/Members/Index');
             return inertia('Tenant/Home');
         })->name('tenant.home');
+
+        // ROTA GRÁFICOS
+        Route::get('/dashboardGraficos', [\App\Http\Controllers\Tenant\DashboardController::class, 'index'])->name('tenant.dashboardGraficos');
     });
 
 });

@@ -3,30 +3,30 @@
         <div class="p-4">
             <h1 class="text-2xl mb-4">Novo aluno</h1>
             <!-- DEBUG: Ver todos os erros -->
-            <pre>{{ form.errors }}</pre>
-            <pre>{{ JSON.stringify(form.errors, null, 2) }}</pre>
+            <!-- <pre>{{ form.errors }}</pre>
+            <pre>{{ JSON.stringify(form.errors, null, 2) }}</pre> -->
 
             <div class="bg-white shadow-md rounded-lg p-6 max-w-4xl">
                 <form @submit.prevent="submit" class="space-y-2 max-w-full">                    
                     <div>
-                        <label class="block mb-1">Nome</label>
-                        <input v-model="form.name" placeholder="Nome" class="border p-2 w-full" />
+                        <label class="block mb-1">Nome <span class="text-red-500">*</span></label>
+                        <input v-model="form.name" placeholder="Nome" class="border p-2 w-full" required/>
                         <span v-if="form.errors.name" class="text-red-500">
                             {{ form.errors.name }}
                         </span>
                     </div>
 
                     <div>
-                        <label class="block mb-1">Email</label>
-                        <input v-model="form.email" placeholder="Email" class="border p-2 w-full" />
+                        <label class="block mb-1">Email <span class="text-red-500">*</span></label>
+                        <input v-model="form.email" placeholder="Email" class="border p-2 w-full" required/>
                         <span v-if="form.errors.email" class="text-red-500">
                             {{ form.errors.email }}
                         </span>
                     </div>
 
                     <div>
-                        <label class="block mb-1">Telefone</label>
-                        <input v-model="form.phone" placeholder="Telefone" class="border p-2 w-full" />
+                        <label class="block mb-1">Telefone <span class="text-red-500">*</span></label>
+                        <input v-model="form.phone" placeholder="Telefone" class="border p-2 w-full" @input="handlePhoneInput" required/>
                         <span v-if="form.errors.phone" class="text-red-500">
                             {{ form.errors.phone }}
                         </span>
@@ -74,7 +74,7 @@
 
                         <div class="md:col-span-3">
                             <label class="block mb-1">CEP</label>
-                            <input v-model="form.zip_code" class="border p-2 w-full" placeholder="CEP" />
+                            <input v-model="form.zip_code" class="border p-2 w-full" placeholder="CEP" @input="handleCEPInput" />
                             <span v-if="form.errors.zip_code" class="text-red-500">
                                 {{ form.errors.zip_code }}
                             </span>
@@ -82,8 +82,8 @@
                     </div>
 
                     <div>
-                        <label class="block mb-1">Valor do plano</label>
-                        <input v-model="form.plan_value" class="border p-2 w-full" placeholder="Valor do plano" />
+                        <label class="block mb-1">Valor do plano <span class="text-red-500">*</span></label>
+                        <input v-model="form.plan_value" class="border p-2 w-full" placeholder="Valor do plano" required />
                         <span v-if="form.errors.plan_value" class="text-red-500">
                             {{ form.errors.plan_value }}
                         </span>
@@ -147,5 +147,33 @@ function submit() {
     }
     
   })
+}
+
+// MASCARAS 
+// Máscara para telefone
+const maskPhone = (value) => {
+  if (!value) return ''
+  value = value.replace(/\D/g, '')
+  value = value.replace(/^(\d{2})(\d)/g, '($1) $2')
+  value = value.substring(0, 13)
+  value = value.replace(/(\d)(\d{4})$/, '$1-$2')
+  return value
+}
+
+// Máscara para CEP
+const maskCEP = (value) => {
+  if (!value) return ''
+  value = value.replace(/\D/g, '')
+  value = value.substring(0, 8)
+  value = value.replace(/^(\d{5})(\d)/, '$1-$2')
+  return value
+}
+
+const handlePhoneInput = (event) => {
+  form.phone = maskPhone(event.target.value)
+}
+
+const handleCEPInput = (event) => {
+  form.zip_code = maskCEP(event.target.value)
 }
 </script>
