@@ -2,6 +2,8 @@
     <TenantLayout>
         <div class="p-4">
             <h1 class="text-2xl mb-4">Alunos</h1>
+            <!-- DEBUG -->
+            <!-- <pre>{{ members}} </pre> -->
             <!-- Exibir mensagem de sucesso -->
             <div v-if="$page.props.flash?.success" class="bg-green-100 border border-green-400 text-green-700 px-4 py-3 rounded mb-4">
                 {{ $page.props.flash.success }}
@@ -26,7 +28,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="m in members" :key="m.id">
+                    <tr v-for="m in members.data" :key="m.id">
                         <td class="p-2 border">{{ m.name }}</td>
                         <td class="p-2 border">{{ m.email }}</td>
                         <td class="p-2 border">
@@ -38,6 +40,26 @@
                     </tr>
                 </tbody>
             </table>
+           <div v-if="members.last_page > 1" class="mt-4 flex justify-center gap-2">
+                <template v-for="link in members.links" :key="link.label">
+                    <!-- Se tiver URL, usa Link -->
+                    <Link
+                        v-if="link.url"
+                        :href="link.url"
+                        :class="[
+                            'px-3 py-1 border rounded',
+                            link.active ? 'bg-blue-600 text-white' : 'bg-white hover:bg-gray-100'
+                        ]"
+                        v-html="link.label"
+                    />
+                    <!-- Se NÃO tiver URL, usa span desabilitado -->
+                    <span
+                        v-else
+                        class="px-3 py-1 border rounded opacity-50 cursor-not-allowed bg-gray-100"
+                        v-html="link.label"
+                    />
+                </template>
+            </div>
         </div>
     </TenantLayout>
 </template>
@@ -47,8 +69,10 @@ import { ref, watch } from 'vue'
 // import { usePage } from '@inertiajs/vue3'
 import TenantLayout from '@/Layouts/TenantLayout.vue'
 
+import { Link } from '@inertiajs/vue3'
+
 defineProps({
-  members: Array
+  members: Object
 })
 
 // const page = usePage()

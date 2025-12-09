@@ -2,7 +2,7 @@
     <TenantLayout>
         <div class="p-4">
             <h1 class="text-2xl mb-4">Novo aluno</h1>
-            <!-- DEBUG: Ver todos os erros -->
+            <!-- DEBUG: Ver todos os erros -->         
             <!-- <pre>{{ form.errors }}</pre>
             <pre>{{ JSON.stringify(form.errors, null, 2) }}</pre> -->
 

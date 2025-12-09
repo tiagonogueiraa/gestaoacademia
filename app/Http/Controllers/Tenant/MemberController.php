@@ -11,7 +11,7 @@ class MemberController extends Controller
     public function index()
     {
         return inertia('Tenant/Members/Index', [
-            'members' => Member::orderBy('name')->get(),
+            'members' => Member::orderBy('name')->paginate(10),
         ]);
     }
 
