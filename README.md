@@ -195,7 +195,7 @@ Caminho windows: C:\Windows\System32\drivers\etc\hosts
 
 ### Pontos que podem ser melhorados
 
- * Permissões per perfil no tenant 
+ * Permissões por perfil no tenant 
 
  * Dashboard mais completo para o sistema central
 
