@@ -4,7 +4,20 @@ Este projeto foi desenvolvido como teste técnico, com foco em criar um sistema 
 
 Usei Laravel 12, Inertia.js, Vue.js, MySQL e o pacote stancl/tenancy para a parte multi-tenant.
 
+### Arquivos extras incluídos no projeto
+
+Para facilitar a análise sem necessidade de subir Docker localmente, incluí também:
+
+ * docs/projeto.pdf: PDF do desafio recebido
+
+ * database_dumps/dump_laravel.sql: Banco central com tabela de tenants
+
+ * database_dumps/dump_tenantacademia1.sql: Banco do tenant exemplo (Academia 1)
+
+ * database_dumps/dump_tenantacademia2.sql: Banco do tenant exemplo (Academia 2)
+
 ## Visão Geral do Sistema
+
 
 ### 1 - Sistema Central (gestaoacademia.localhost)
 
@@ -120,8 +133,74 @@ Ex. academia1.localhost, academia2.localhost, academia3.localhost...
 
  * Formulário com os dados solicitados, nome, telefone, endereço...
 
- 
+### Dashboard do Tenant
+
+ * Total de alunos (6 meses)
+
+ * Total de alunos ( 30 dias)
+
+ * Total últimos 6 meses em Reais.
+
+ * Alunos cadastrados nos últimos 30 dias
+
+ * Gráfico de Crescimento Mensal (6 Meses) (Chart.js)
+
+ * Crescimento em Reais Mensal (6 Meses)
+
+### Autenticação
+ ### Central
+
+ * Modelo próprio: CentralUser
+
+ * Login separado
+
+ * Rotas separadas (routes/central.php)
+
+### Tenant
+
+ * Usa o User padrão
+
+ * Cada tenant tem sua tabela de usuários
+
+ * Login específico do tenant
+
+### Como rodar o projeto (via Sail)
+
+Instalar dependências:
+
+    composer install
 
 
+Subir os containers:
+
+    ./vendor/bin/sail up -d
 
 
+Instalar dependências front-end:
+
+    ./vendor/bin/sail npm install
+
+
+Rodar as migrations centrais:
+
+    ./vendor/bin/sail artisan migrate
+
+
+Editar arquivo hosts para adicionar o site:
+
+Caminho windows: C:\Windows\System32\drivers\etc\hosts
+
+    127.0.0.1 gestaoacademia.localhost
+    127.0.0.1 academia1.localhost
+
+### Pontos que podem ser melhorados
+
+ * Permissões per perfil no tenant 
+
+ * Dashboard mais completo para o sistema central
+
+ * Edição de tenant
+
+ * Layout mais bonito
+
+ * Testes automatizados

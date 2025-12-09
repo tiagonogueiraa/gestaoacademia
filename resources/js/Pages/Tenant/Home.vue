@@ -16,7 +16,7 @@
         </a>
 
         <a href="/dashboardGraficos" class="block bg-gray-600 hover:bg-gray-700 text-white px-4 py-2 rounded">
-          📊 Ver Dashboard Breeze
+          📊 Ver Dashboard
         </a>
       </div>
 
